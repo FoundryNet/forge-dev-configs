@@ -1,0 +1,94 @@
+{
+  "//": [
+    "FoundryNet canonical schema \u2014 VS Code settings FRAGMENT.",
+    "MERGE these keys into your existing settings.json. Do not replace the file.",
+    "Generated from https://github.com/FoundryNet/canonical-schema v1.0.0."
+  ],
+  "github.copilot.chat.codeGeneration.instructions": [
+    {
+      "file": ".github/copilot-instructions.md"
+    }
+  ],
+  "cSpell.words": [
+    "bacnet",
+    "canonicalize",
+    "fanuc",
+    "focas",
+    "forge",
+    "foundrynet",
+    "haas",
+    "kwh",
+    "mazak",
+    "mint",
+    "modbus",
+    "mtconnect",
+    "okuma",
+    "opcua",
+    "profinet",
+    "prusa",
+    "rpm",
+    "sinumerik",
+    "sparkplug"
+  ],
+  "files.associations": {
+    ".cursorrules": "markdown",
+    ".windsurfrules": "markdown",
+    "*.forge.json": "json"
+  },
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "*.forge.json",
+        "canonical-*.json"
+      ],
+      "url": "https://github.com/FoundryNet/canonical-schema/raw/main/schema/fields.json"
+    }
+  ],
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "forge.canonicalFields": [
+    "spindle_speed_rpm",
+    "spindle_load_pct",
+    "axes.0.position_actual",
+    "sensor_readings.vibration_x",
+    "operating_hours",
+    "energy_kwh",
+    "axes.0.temperature_c",
+    "alarm_code",
+    "axes.0.load_percent",
+    "feed_rate",
+    "part_count",
+    "axes.1.position_actual",
+    "sensor_readings.coolant_temp",
+    "sensor_readings.total_temp_lpc_outlet",
+    "axes.2.position_actual",
+    "sensor_readings.total_temp_lpt_outlet",
+    "sensor_readings.total_temp_hpc_outlet",
+    "sensor_readings.hydraulic_pressure",
+    "sensor_readings.pressure_fan_inlet",
+    "alarm_description",
+    "sensor_readings.good_parts",
+    "tool_id",
+    "sensor_readings.core_speed_rpm",
+    "alarm_severity",
+    "sensor_readings.air_pressure",
+    "sensor_readings.cycle_time",
+    "sensor_readings.fan_speed_rpm",
+    "sensor_readings.voltage",
+    "metadata.controller_model",
+    "payload_kg",
+    "sensor_readings.coolant_flow",
+    "execution_state",
+    "sensor_readings.tcp_speed",
+    "downtime_minutes",
+    "sensor_readings.unplanned_downtime",
+    "sensor_readings.planned_downtime",
+    "serial_number",
+    "sensor_readings.power_consumption",
+    "sensor_readings.reject_parts",
+    "sensor_readings.availability"
+  ],
+  "forge.mcpEndpoint": "https://mcp.foundrynet.io/mcp",
+  "forge.sandboxImage": "ghcr.io/foundrynet/forge-sandbox"
+}
