@@ -1,7 +1,6 @@
 ---
-description: "FoundryNet Canonical Schema field names for industrial equipment telemetry (CNC, robots, PLCs, vehicles, HVAC) - prevents invented field names"
-globs: **/*.py, **/*.ts, **/*.js, **/*.tsx, **/*.jsx, **/*.go, **/*.rs, **/*.java, **/*.cs, **/*.sql
-alwaysApply: false
+applyTo: '**/*.py,**/*.ts,**/*.js,**/*.tsx,**/*.go,**/*.rs,**/*.java,**/*.cs,**/*.sql'
+description: 'Canonical field naming for industrial equipment telemetry (CNC, robots, PLCs, vehicles, HVAC). 366 field names generated from the MIT-licensed FoundryNet canonical schema and verified against it at build time, with an alias table for the plausible-but-wrong spellings an LLM otherwise invents.'
 ---
 
 # FoundryNet Canonical Schema — field naming for industrial telemetry

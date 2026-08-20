@@ -375,16 +375,34 @@ def main():
     rules = render_rules(d, suffixes)
     mdc = (
         "---\n"
-        "description: FoundryNet Canonical Schema field names for industrial "
-        "equipment telemetry (CNC, robots, PLCs, vehicles, HVAC). Prevents "
-        "invented field names.\n"
-        "globs: **/*.py,**/*.ts,**/*.js,**/*.tsx,**/*.jsx,**/*.go,**/*.rs,**/*.java,**/*.cs,**/*.sql\n"
+        # description quoted and globs comma-space separated to match the
+        # convention in PatrickJS/awesome-cursorrules, so the file we ship and
+        # the file we submit there are byte-identical.
+        'description: "FoundryNet Canonical Schema field names for industrial '
+        'equipment telemetry (CNC, robots, PLCs, vehicles, HVAC) - prevents '
+        'invented field names"\n'
+        "globs: **/*.py, **/*.ts, **/*.js, **/*.tsx, **/*.jsx, **/*.go, **/*.rs, **/*.java, **/*.cs, **/*.sql\n"
         "alwaysApply: false\n"
+        "---\n\n" + rules
+    )
+
+    # github/awesome-copilot's self-contained format: instructions/*.instructions.md
+    # with `applyTo` + `description` frontmatter. Same body as everything else,
+    # so the guidance cannot drift between tools.
+    instructions = (
+        "---\n"
+        "applyTo: '**/*.py,**/*.ts,**/*.js,**/*.tsx,**/*.go,**/*.rs,**/*.java,**/*.cs,**/*.sql'\n"
+        "description: 'Canonical field naming for industrial equipment telemetry "
+        "(CNC, robots, PLCs, vehicles, HVAC). 366 field names generated from the "
+        "MIT-licensed FoundryNet canonical schema and verified against it at build "
+        "time, with an alias table for the plausible-but-wrong spellings an LLM "
+        "otherwise invents.'\n"
         "---\n\n" + rules
     )
 
     outputs = {
         os.path.join(".cursor", "rules", "foundrynet-industrial-telemetry.mdc"): mdc,
+        "foundrynet-industrial-telemetry.instructions.md": instructions,
         ".cursorrules": rules,
         ".windsurfrules": render_rules(d, suffixes),
         "claude-industrial.md": render_claude(d),
