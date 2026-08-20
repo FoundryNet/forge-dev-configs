@@ -368,8 +368,24 @@ def main():
         f"  _{s:<9} {desc:<24} ({c.get(s, 0)} fields)" for s, desc in keep
     )
 
+    # Cursor's current format is .cursor/rules/*.mdc with frontmatter; the bare
+    # .cursorrules file is the legacy form. Ship both: the legacy file for
+    # existing setups, the .mdc because that is what Cursor reads now and what
+    # awesome-cursorrules requires of a submission.
+    rules = render_rules(d, suffixes)
+    mdc = (
+        "---\n"
+        "description: FoundryNet Canonical Schema field names for industrial "
+        "equipment telemetry (CNC, robots, PLCs, vehicles, HVAC). Prevents "
+        "invented field names.\n"
+        "globs: **/*.py,**/*.ts,**/*.js,**/*.tsx,**/*.jsx,**/*.go,**/*.rs,**/*.java,**/*.cs,**/*.sql\n"
+        "alwaysApply: false\n"
+        "---\n\n" + rules
+    )
+
     outputs = {
-        ".cursorrules": render_rules(d, suffixes),
+        os.path.join(".cursor", "rules", "foundrynet-industrial-telemetry.mdc"): mdc,
+        ".cursorrules": rules,
         ".windsurfrules": render_rules(d, suffixes),
         "claude-industrial.md": render_claude(d),
         "vscode-settings.json": render_vscode(d),
@@ -379,7 +395,8 @@ def main():
 
     for rel, content in outputs.items():
         path = os.path.join(HERE, rel)
-        os.makedirs(os.path.dirname(path), exist_ok=True) if os.path.dirname(rel) else None
+        if os.path.dirname(rel):
+            os.makedirs(os.path.dirname(path), exist_ok=True)
         with open(path, "w", encoding="utf-8") as f:
             f.write(content if content.endswith("\n") else content + "\n")
         print(f"  {rel:<42} {len(content):>6} bytes")
